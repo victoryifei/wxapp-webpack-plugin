@@ -53,6 +53,7 @@ export default class WXAppPlugin {
 	constructor(options = {}) {
 		this.options = defaults(options || {}, {
 			clear: true,
+			appJsonile: 'app.json',
 			include: [],
 			exclude: [],
 			dot: false, // Include `.dot` files
@@ -240,7 +241,7 @@ export default class WXAppPlugin {
 	}
 
 	async getEntryResource() {
-		const appJSONFile = resolve(this.base, 'app.json');
+		const appJSONFile = resolve(this.base, this.options.appJsonile);
 		const { pages = [], subPackages = [], tabBar = {} } = await readJson(
 			appJSONFile
 		);
